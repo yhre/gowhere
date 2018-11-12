@@ -15,6 +15,7 @@ export default {
   @import "assets/css/varibles.styl"
   .bg
    background:$bgColor;
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -4,7 +4,12 @@
 
 <script>
     export default {
-        name: "homeheader"
+        name: 'homeheader',
+      data(){
+        return{
+
+        }
+      }
     }
 </script>
 
