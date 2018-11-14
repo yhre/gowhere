@@ -193,6 +193,7 @@ sub {
 html {
   overflow-x: hidden;
   height: 100%;
+  width: 100%;
   font-size: 50px;
   -webkit-tap-highlight-color: transparent;
 }
@@ -203,6 +204,7 @@ body {
   font-size: .28em;
   line-height: 1;
   -webkit-text-size-adjust: none;
+  /*width: 100%;*/
 }
 
 hr {
