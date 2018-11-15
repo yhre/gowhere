@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import home from '@/page/home'
 import City from '@/page/city/City'
 import Detail from '@/page/detail/Detail'
+import Citycopy from '@/page/citycopy/Citycopy'
 Vue.use(Router)
 
 export default new Router({
@@ -18,6 +19,12 @@ export default new Router({
       name: 'city',
       component: City
     },
+    {
+      path: '/citycopy',
+      name: 'citycopy',
+      component: Citycopy
+    },
+
     {
       path: '/detail/:id',
       name: 'detail',

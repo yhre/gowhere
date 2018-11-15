@@ -6,9 +6,8 @@
         @touchstart.prevent="handleTouchStart"
         @touchmove="handleTouchMove"
         @touchend="handleTouchEnd"
-        @click="handleLetterClick"
-        :ref="item">{{item}}
-    </li>
+        @click="handleLetterClick($event)"
+        :ref="item">{{item}}</li>
   </ul>
 </template>
 
@@ -19,7 +18,7 @@
       cities: Object
     },
     computed: {
-      letters() {
+      letters () {
         const letters = []
         for (let i in this.cities) {
           letters.push(i)
@@ -27,7 +26,7 @@
         return letters
       }
     },
-    data() {
+    data () {
       return {
         touchStatus: false,
         startY: 0,
@@ -35,22 +34,20 @@
         timer: null
       }
     },
-    //当数据加载出来后重新渲染
-    updated() {
+    updated () {
       this.startY = this.$refs['A'][0].offsetTop
       this.alphabetHeight = this.$refs['A'][0].clientHeight
     },
     methods: {
-      handleLetterClick(event) {
-        //传递给父组件
+      handleLetterClick (event) {
+        console.log(event.target.innerText);
         this.$emit('change', event.target.innerText)
       },
-      handleTouchStart() {
+      handleTouchStart () {
         this.touchStatus = true
       },
-      handleTouchMove(e) {
+      handleTouchMove (e) {
         if (this.touchStatus) {
-          //time做一个数据节流16毫秒之间（节约handleTouchMove的执行频率，优化代码性能）
           if (this.time) {
             clearTimeout(this.timer)
           }
@@ -63,12 +60,13 @@
           }, 16)
         }
       },
-      handleTouchEnd() {
+      handleTouchEnd () {
         this.touchStatus = false
       }
     }
   }
 </script>
+
 
 <style scoped lang="stylus" type="text/stylus">
   .list
@@ -80,6 +78,7 @@
     right: 0
     bottom: 0
     width .4rem
+    z-index 888
     .item
       text-align: center
       line-height .42rem

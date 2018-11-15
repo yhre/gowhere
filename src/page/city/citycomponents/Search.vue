@@ -67,13 +67,12 @@ export default {
     cities: Object
   },
   mounted () {
-    this.scroll = new Bscroll(this.$refs.search)
+    this.scroll = new Bscroll(this.$refs.search,{ mouseWheel: true, click: true, tap: true })
   }
 }
 </script>
 
 <style lang="stylus" type="text/stylus" scoped>
-
   .search
     height: .72rem
     padding 0 .1rem

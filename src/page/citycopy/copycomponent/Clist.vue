@@ -2,7 +2,7 @@
   <div class="list" ref="wrapper">
     <div>
       <div class="area">
-        <div class="title border-topbottom">当前城市</div>
+        <div class="title border-topbottom" >当前城市</div>
         <div class="button-list">
           <div class="button-wrapper">
             <div class="button">{{this.currentCity}}</div>
@@ -12,24 +12,17 @@
       <div class="area border-topbottom">
         <div class="title">热门城市</div>
         <div class="button-list">
-          <div class="button-wrapper"
-               v-for="item of hot"
-               :key="item.id"
-               @click="handleCityClick(item.name)">
+          <div class="button-wrapper" v-for="item in hot" :key="item.id" @click="chooseCity(item.name)">
             <div class="button">{{item.name}}</div>
           </div>
+
         </div>
       </div>
-      <div class="area"
-           v-for="(item, key) of cities"
-           :key="key" :ref="key">
+      <div class="area" v-for="(item ,key) in cities" :key="key" :ref="key">
         <div class="title border-topbottom">{{key}}</div>
-        <div class="item-list">
-          <div class="item border-bottom"
-               v-for="innerItem of item"
-               :key="innerItem.id"
-               @click="handleCityClick(innerItem.name)">
-            {{innerItem.name}}
+        <div class="item-list" v-for="itemlist in item" @click="chooseCity(itemlist.name)">
+          <div class="item border-bottom">
+            {{itemlist.name}}
           </div>
         </div>
       </div>
@@ -40,42 +33,46 @@
 <script>
   import Bscroll from 'better-scroll'
   import { mapState, mapMutations } from 'vuex'
-  export default {
-    name: 'CityList',
-    props: {
-      hot: Array,
-      cities: Object,
-      letter: String
-    },
-    computed: {
-      ...mapState({
-        currentCity: 'city'
-      })
-    },
-    watch: {
-      letter () {
-        if (this.letter) {
-          const element = this.$refs[this.letter][0]
-          this.scroll.scrollToElement(element)
-          // console.log(element)
-        }
-      }
-    },
-    mounted () {
-      this.scroll = new Bscroll(this.$refs.wrapper,{ mouseWheel: true, click: true, tap: true })
-    },
-    methods: {
-      handleCityClick (city) {
-        this.$store.commit('changeCity', city)
-        this.changeCity(city)
-        this.$router.push('/')
-      },
-      ...mapMutations(['changeCity'])
-    }
-  }
-</script>
+    export default {
+        name: "Clist",
+        props:{
+          cities:Object,
+          hot:Array,
+          letter:String
+        },
+        data(){
+          return{
 
-<style scoped lang="stylus" type="text/stylus">
+          }
+        },
+        methods:{
+          chooseCity(city){
+            this.$store.commit('changeCity', city)
+            this.changeCity(city)
+            this.$router.push('/')
+          },
+          ...mapMutations(['changeCity'])
+        },
+      computed: {
+        ...mapState({
+          currentCity: 'city'
+        })
+      },
+      watch: {
+        letter () {
+          if (this.letter) {
+            const element = this.$refs[this.letter][0]
+            this.scroll.scrollToElement(element)
+            // console.log(element)
+          }
+        }
+      },
+      mounted(){
+          this.scroll=new Bscroll(this.$refs.wrapper,{ mouseWheel: true, click: true, tap: true })
+      }
+    }
+</script>
+<style lang="stylus" type="text/stylus" scoped>
   .border-topbottom
     &:before
       border-color #ccc
@@ -115,3 +112,5 @@
         color #666
         padding-left .2rem
 </style>
+
+
